@@ -27,5 +27,5 @@ jobs:
 
       - name: Start CI run
         run: bun nx affected -t lint build
-      - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js" --stop-agents-after="build"
+      # - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js" --stop-agents-after="build"
 
