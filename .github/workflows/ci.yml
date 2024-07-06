@@ -21,12 +21,14 @@ jobs:
       - uses: oven-sh/setup-bun@v1
         with:
           bun-version: latest
-      - name: Run NX Affected
-        run: nx affected --base=main --head=HEAD
 
-      - run: bun install
+      # Connect your workspace on nx.app and uncomment this to enable task distribution.
+      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
+      # - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
+
+      - run: bun install --no-cache
       - uses: nrwl/nx-set-shas@v4
 
-      - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js"
-      - run: npx nx-cloud record -- nx format:check
+      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
+      # - run: bun nx-cloud record -- echo Hello World
       - run: bun nx affected -t lint build
