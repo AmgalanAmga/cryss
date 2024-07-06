@@ -29,4 +29,5 @@
       "exclude": ["apps/user-service-e2e/**/*"]
     }
   ]
+  
 }
