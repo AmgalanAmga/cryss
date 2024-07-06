@@ -25,7 +25,8 @@ jobs:
       - run: bun install
       - uses: nrwl/nx-set-shas@v4
 
-      - name: Start CI run
-        run: bun nx affected -t lint build
+
+      - run: npx nx-cloud record -- nx format:check
+      - run: bun nx affected -t lint build
       # - run: bunx nx-cloud start-ci-run --distribute-on="8 linux-medium-js" --stop-agents-after="build"
 
