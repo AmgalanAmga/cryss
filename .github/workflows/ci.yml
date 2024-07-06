@@ -22,10 +22,9 @@ jobs:
         with:
           bun-version: latest
 
-      - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js"
-
       - run: bun install
       - uses: nrwl/nx-set-shas@v4
 
+      - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js"
       - run: npx nx-cloud record -- nx format:check
       - run: bun nx affected -t lint build
