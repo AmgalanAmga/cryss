@@ -15,12 +15,7 @@
     "sharedGlobals": []
   },
   "tasksRunnerOptions": {
-    "default": {
-      "runner": "nx/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "test", "lint"]
-      }
-    }
+    "default": {}
   },
   "targetDefaults": {
     "@nx/esbuild:esbuild": {
