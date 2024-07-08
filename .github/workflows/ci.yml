@@ -1,18 +1,21 @@
 name: CI
 
 on:
-  push:
+  pull_request:
+    types:
+      - "labeled"
     branches:
       - main
-  pull_request:
 
 permissions:
-  actions: read
   contents: read
 
 jobs:
   main:
     runs-on: ubuntu-latest
+    env:
+      NX_CLOUD_ACCESS_TOKEN: ${{ secrets.NX_CLOUD_ACCESS_TOKEN }}
+    if: "${{ github.event.label.name == 'Cloud' }}"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -20,15 +23,9 @@ jobs:
 
       - uses: oven-sh/setup-bun@v1
         with:
-          bun-version: latest
+          bun-version: 1.1.10
 
-      # Connect your workspace on nx.app and uncomment this to enable task distribution.
-      # The "--stop-agents-after" is optional, but allows idle agents to shut down once the "build" targets have been requested
-      # - run: bunx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
-
-      - run: bun install --no-cache
+      - run: bun install
       - uses: nrwl/nx-set-shas@v4
 
-      # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
-      # - run: bun nx-cloud record -- echo Hello World
       - run: bun nx affected -t lint build

@@ -14,20 +14,17 @@
     ],
     "sharedGlobals": []
   },
+  "tasksRunnerOptions": {
+    "default": {}
+  },
   "targetDefaults": {
-    "@nx/esbuild:esbuild": {
+    "build": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
     }
   },
   "plugins": [
-    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } },
-    {
-      "plugin": "@nx/jest/plugin",
-      "options": { "targetName": "test" },
-      "exclude": ["apps/user-service-e2e/**/*"]
-    }
-  ],
-  "nxCloudAccessToken": "MGFkN2JhMWQtODUzYi00NWY4LWJkYTktNDk2NTRlNzE2ZTQ0fHJlYWQtd3JpdGU="
+    { "plugin": "@nx/eslint/plugin", "options": { "targetName": "lint" } }
+  ]
 }
